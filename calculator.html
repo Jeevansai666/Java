@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .calculator {
+      display: inline-block;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .display {
+      width: 160px;
+      height: 30px;
+      margin-bottom: 10px;
+      text-align: right;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .button {
+      width: 35px;
+      height: 35px;
+      margin: 3px;
+      font-size: 16px;
+      column-span: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Basic Calculator</h2>
+
+  <div class="calculator">
+    <input type="text" class="display" id="display" placeholder="0" disabled>
+
+    <br>
+
+    <button class="button" onclick="press('7')">7</button>
+    <button class="button" onclick="press('8')">8</button>
+    <button class="button" onclick="press('9')">9</button>
+    <button class="button" onclick="press('/')">/</button>
+
+    <br>
+
+    <button class="button" onclick="press('4')">4</button>
+    <button class="button" onclick="press('5')">5</button>
+    <button class="button" onclick="press('6')">6</button>
+    <button class="button" onclick="press('*')">*</button>
+
+    <br>
+
+    <button class="button" onclick="press('1')">1</button>
+    <button class="button" onclick="press('2')">2</button>
+    <button class="button" onclick="press('3')">3</button>
+    <button class="button" onclick="press('-')">-</button>
+
+    <br>
+
+    <button class="button" onclick="press('0')">0</button>
+    <button class="button" onclick="press('.')">.</button>
+    <button class="button" onclick="equal()">=</button>
+    <button class="button" onclick="press('+')">+</button>
+
+    <br>
+
+    <button class="button" onclick="clearDisplay()">C</button>
+  </div>
+
+  <script>
+    function press(value) {
+      let display = document.getElementById("display");
+      display.value += value;
+    }
+
+    function equal() {
+      let display = document.getElementById("display");
+      display.value = eval(display.value);
+    }
+
+    function clearDisplay() {
+      document.getElementById("display").value = "";
+    }
+  </script>
+
+</body>
+</html>

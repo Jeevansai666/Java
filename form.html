@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fefe02;
+        }
+
+        fieldset {
+            margin: 50px auto;
+            width: 350px;
+            background-color: rgb(248, 251, 253);
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        legend {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 7px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .error {
+            color: rgb(7, 114, 246);
+            font-size: 0.85em;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            color: rgb(15, 134, 238);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cbe0ff;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return validateForm()" >
+        <fieldset>
+            <legend>REGISTRATION FORM</legend>
+
+            <label for="name">Name <span style="color: red;">*</span>:</label>
+            <input type="text" name="name" id="name" placeholder="First name" required>
+
+            <label for="phno">Phone Number <span style="color: red;">*</span>:</label>
+            <input type="text" id="phno" placeholder="10-digit phone number" required>
+            <span id="phnoError" class="error"></span>
+
+            <label for="email">E-mail <span style="color: red;">*</span>:</label>
+            <input type="email" id="email" placeholder="example@mail.com" required>
+            <span id="emailError" class="error"></span>
+
+            <label for="password">Password <span style="color: red;">*</span>:</label>
+            <input type="password" id="password" placeholder="Password" required>
+            <span id="passError" class="error"></span>
+
+            <label>Gender :</label>
+            <input type="radio" name="gender" id="male" value="Male"><label for="male" style="display: inline;">Male</label>
+            <input type="radio" name="gender" id="female" value="Female"><label for="female" style="display: inline;">Female</label>
+            <input type="radio" name="gender" id="other" value="Other"><label for="other" style="display: inline;">Other</label>
+
+            <label for="dob">Date of Birth :</label>
+            <input type="date" name="dob" id="dob">
+
+            <label for="address">Address <span style="color: red;">*</span>:</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+
+            <label for="role">Person's Role :</label>
+            <select name="role" id="role">
+                <option value="Customer">Customer</option>
+                <option value="Staff">Staff</option>
+                <option value="Chef">Chef</option>
+            </select>
+
+            <br><br>
+            <label>
+                <input type="checkbox" name="terms" id="terms" required> I agree to the Terms and Conditions
+            </label>
+
+            <br><br>
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            const phno = document.getElementById("phno").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            const phnoError = document.getElementById("phnoError");
+            const emailError = document.getElementById("emailError");
+            const passError = document.getElementById("passError");
+
+            phnoError.innerText = "";
+            emailError.innerText = "";
+            passError.innerText = "";
+
+            // Phone number validation (10 digits)
+            const phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phno)) {
+                phnoError.innerText = "Enter a valid 10-digit phone number";
+                isValid = false;
+            }
+
+            // Email validation
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                emailError.innerText = "Enter a valid email address";
+                isValid = false;
+            }
+
+            // Password validation
+            const passwordPattern = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@#$%^&!])[A-Za-z\d@#$%^&!]{6,}$/;
+            if (!passwordPattern.test(password)) {
+                passError.innerText = "Password must include uppercase, lowercase, number & special character";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
